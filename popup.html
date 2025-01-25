@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>GeminiAI翻訳アドオン</title>
+  <style>
+    /* 既存のスタイル */
+    .api-key-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    #apiKey {
+      padding-right: 30px;
+    }
+
+    .toggle-visibility {
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .donate-button {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    .wallet-addresses {
+      background-color: #f0f0f0;
+      padding: 10px;
+      border-radius: 5px;
+      font-family: monospace;
+    }
+
+    .wallet-addresses p {
+      margin: 5px 0;
+    }
+
+    .address {
+      cursor: pointer;
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>GeminiAI翻訳アドオン</h1>
+  <div class="api-key-container">
+    <input type="password" id="apiKey" placeholder="Gemini APIキーを入力">
+    <span class="toggle-visibility" onclick="toggleApiKeyVisibility()">👁️</span>
+  </div>
+  <button id="saveApiKey">保存</button>
+  <div id="translationResult">
+    <p>テキストを選択して5を押すと翻訳結果がここに表示されます</p>
+  </div>
+
+  <h3>支援</h3>
+  <p>このアドオンの開発を支援するには、以下のアドレスに暗号資産で寄付できます：</p>
+
+  <dibr class="wallet-addresses">
+    <p><img src="./img/eth.svg" alt="ETH" class="icon"> <span class="address" data-full-address="0x1a875E9b4a8fdeA307F8cDb5A7dAe4BEBF03968E">0x1a875E9b4a8fdeA307F8cDb5A7dAe4BEBF03968E</span></p>
+    <br />
+    <p><img src="./img/solana.svg" alt="Solana" class="icon"> <span class="address" data-full-address="ET99PFkX8BbokRCSz8s9vdwPE7ZnRC9sFp9LAiftPp43">ET99PFkX8BbokRCSz8s9vdwPE7ZnRC9sFp9LAiftPp43</span></p>
+  </div>
+
+
+
+  <input type="text" id="tempInput" style="position: absolute; left: -9999px;">
+
+  <script src="popup.js"></script>
+
+  <script>
+    function copyToClipboard(text) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+      }
+
+      // アドレス要素にクリックイベントリスナーを追加
+      document.querySelectorAll('.address').forEach(element => {
+        element.addEventListener('click', function () {
+          const fullAddress = this.getAttribute('data-full-address');
+          copyToClipboard(fullAddress);
+          alert('アドレスがクリップボードにコピーされました');
+        });
+      });
+
+
+    function toggleApiKeyVisibility() {
+      const apiKeyInput = document.getElementById('apiKey');
+      const toggleButton = document.querySelector('.toggle-visibility');
+      if (apiKeyInput.type === 'password') {
+        apiKeyInput.type = 'text';
+        toggleButton.textContent = '🔒';
+      } else {
+        apiKeyInput.type = 'password';
+        toggleButton.textContent = '👁️';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const apiKeyInput = document.getElementById('apiKey');
+      apiKeyInput.type = 'password';
+    });
+  </script>
+</body>
+</html>
