@@ -87,7 +87,7 @@ document.head.appendChild(style);
 // (1) キー操作で翻訳を呼び出す
 // ---------------------------------------------------
 document.addEventListener('keydown', (e) => {
-  if (e.key === '5') {
+  if (event.key === 't' || event.key === 'T') {
     const selectedText = window.getSelection().toString().trim();
     if (selectedText) {
       const range = window.getSelection().getRangeAt(0);
