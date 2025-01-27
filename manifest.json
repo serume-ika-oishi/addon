@@ -3,6 +3,11 @@
   "name": "GeminiAI翻訳アドオン",
   "version": "1.0",
   "description": "選択したテキストをGeminiAIを使って日本語に翻訳します",
+  "icons": {
+    "16": "img/icon.png",
+    "48": "img/icon.png",
+    "128": "img/icon.png"
+  },
   "permissions": [
     "activeTab",
     "storage",
@@ -13,6 +18,11 @@
     "https://generativelanguage.googleapis.com/"
   ],
   "action": {
+    "default_icon": {
+      "16": "img/icon.png",
+      "48": "img/icon.png",
+      "128": "img/icon.png"
+    },
     "default_popup": "popup.html"
   },
   "background": {
